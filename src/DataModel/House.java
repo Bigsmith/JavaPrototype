@@ -7,7 +7,7 @@
 package DataModel;
 
 /**
- *
+ * 
  * @author Thomas
  */
 public class House{
@@ -19,6 +19,10 @@ public class House{
     private String pets;
     private int legalOcc;
     
+    /**
+     * Default constructor for the house class, setting all Strings to UNKNOWN
+     * and all integers to 0.
+     */
     public House(){
         this.address = new Address();
         this.lateFee = 0;
@@ -29,8 +33,23 @@ public class House{
         this.legalOcc = 0;  
     }
     
+    /**
+     * Full constructor for the house class, fully populating the the class'
+     * variables and all of the variables within the Address class declaration
+     * address.
+     * @param address
+     * @param city
+     * @param county
+     * @param postcode
+     * @param lateFee
+     * @param description
+     * @param noRooms
+     * @param housetype
+     * @param pets
+     * @param legalOcc 
+     */
     public House(String address, String city, String county, String postcode, 
-            int lateFee, String description, int noRooms, String housetype, String pets, int LegalOcc){
+            int lateFee, String description, int noRooms, String housetype, String pets, int legalOcc){
         
         this.address = new Address(address, city, county, postcode);
         this.lateFee = lateFee;
