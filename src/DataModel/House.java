@@ -6,11 +6,14 @@
 
 package DataModel;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Thomas
  */
 public class House{
+    private ArrayList<Lease> leaseList = new ArrayList<Lease>();
     private Address address;
     private int lateFee;
     private String description;
@@ -137,6 +140,14 @@ public class House{
 
     public void setLegalOcc(int legalOcc) {
         this.legalOcc = legalOcc;
+    }
+    
+    public Lease getLeaseAt(int index){
+        return this.leaseList.get(index);
+    }
+    
+    public Boolean addLease(Lease newLease){
+        return this.leaseList.add(newLease);
     }
     
     
