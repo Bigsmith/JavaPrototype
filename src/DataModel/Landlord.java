@@ -14,23 +14,26 @@ import java.util.ArrayList;
  */
 public class Landlord {
     private ArrayList<House> houses = new ArrayList<House>();
+    private Address address;
     private String forname;
     private String surname;
     
     public Landlord(){
         this.forname = "UNKNOWN";
         this.surname = "UNKNOWN";
+        this.address = new Address();
     }
     
     public Landlord(String forname){
         this.forname = forname;
         this.surname = "UNKNOWN";
+        this.address = new Address();
     }
     
     public Landlord(String forname, String surname){
         this.forname = forname;
         this.surname = surname;
-
+        this.address = new Address();
     }
     
     public Boolean setForname(String forname){
