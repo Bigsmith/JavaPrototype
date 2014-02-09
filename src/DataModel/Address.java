@@ -7,16 +7,22 @@
 package DataModel;
 
 /**
- *
+ * Used to quickly store the address for an object.
  * @author Thomas
  */
 public class Address {
-    private String address = "UNKNOWN";
-    private String city = "UNKNOWN";
-    private String county = "UNKNOWN";
-    private String postcode = "UNKNOWN";
+    private String address;
+    private String city;
+    private String county;
+    private String postcode;
     
-    public Address(){}
+    
+    public Address(){
+        String address = "UNKNOWN";
+        String city = "UNKNOWN";
+        String county = "UNKNOWN";
+        String postcode = "UNKNOWN";
+    }
     
     public Address(String address, String city, String county, String postcode){
         this.address = address;
