@@ -117,6 +117,16 @@ public class Landlord {
     }
     
     /**
+     * Accessor adding a house to the house array list. Returns a Boolean value
+     * indicating its success.
+     * @param house
+     * @return 
+     */
+    public Boolean addHouse(House house){
+        return this.houses.add(house);
+    }
+       
+    /**
      * Accessor returning the value of address within the address Address class
      * declaration.
      * @return 
