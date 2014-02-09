@@ -8,6 +8,10 @@ package DataModel;
 
 /**
  * Used to quickly store the address for an object.
+ * 
+ * The variable address stores the first two lines of an address, such as the
+ * street and house number/name. City stores the town, city, hamlet etc; county
+ * stores the county and the postcode the postcode.
  * @author Thomas
  */
 public class Address {
@@ -16,7 +20,9 @@ public class Address {
     private String county;
     private String postcode;
     
-    
+    /**
+     * Default constructor, takes no arguments and sets all to "UNKNOWN".
+     */
     public Address(){
         String address = "UNKNOWN";
         String city = "UNKNOWN";
@@ -24,6 +30,13 @@ public class Address {
         String postcode = "UNKNOWN";
     }
     
+    /**
+     * Constructor for Address, takes four arguments and stores them..
+     * @param address
+     * @param city
+     * @param county
+     * @param postcode 
+     */
     public Address(String address, String city, String county, String postcode){
         this.address = address;
         this.city = city;
@@ -31,10 +44,20 @@ public class Address {
         this.postcode = postcode;
     }
 
+    /**
+     * Returns the address.
+     * @return 
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Sets the address and returns a Boolean value notifying if it's been set
+     * successfully.
+     * @param address
+     * @return 
+     */
     public Boolean setAddress(String address) {
         Boolean isDone = false;
         this.address = address;
@@ -45,10 +68,20 @@ public class Address {
         return isDone;
     }
 
+    /**
+     * Returns the value stored in city.
+     * @return 
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Sets the City and returns a Boolean value notifying if it's been set
+     * successfully.
+     * @param city
+     * @return 
+     */
     public Boolean setCity(String city) {
         Boolean isDone = false;
         this.city = city;
@@ -59,10 +92,20 @@ public class Address {
         return isDone;
     }
 
+    /**
+     * Returns the county.
+     * @return 
+     */
     public String getCounty() {
         return county;
     }
 
+    /**
+     * Sets the County and returns a Boolean value notifying if it's been set
+     * successfully.
+     * @param county
+     * @return 
+     */
     public Boolean setCounty(String county) {
         Boolean isDone = false;
         this.county = county;
@@ -73,10 +116,20 @@ public class Address {
         return isDone;
     }
 
+    /**
+     * Returns the postcode.
+     * @return 
+     */
     public String getPostcode() {
         return postcode;
     }
 
+    /**
+     * Sets the Postcode and returns a Boolean value notifying if it's been set
+     * successfully.
+     * @param postcode
+     * @return 
+     */
     public Boolean setPostcode(String postcode) {
         Boolean isDone = false;
         this.postcode = postcode;
@@ -87,6 +140,10 @@ public class Address {
         return isDone;
     }
     
+    /**
+     * Returns the entire address as a single string, the format "address, city, county, postcode".
+     * @return 
+     */
     public String getAsString(){
         return this.address + ", " + this.city + ", " + this.county + ", " + this.postcode; 
     }
