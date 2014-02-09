@@ -20,10 +20,7 @@ public class House{
     private int legalOcc;
     
     public House(){
-        this.address.setAddress("UNKNOWN");
-        this.address.setCity("UNKNOWN");
-        this.address.setCounty("UNKNOWN");
-        this.address.setPostcode("UNKNOWN");
+        this.address = new Address();
         this.lateFee = 0;
         this.description = "UNKNOWN";
         this.noRooms = 0;
@@ -35,10 +32,7 @@ public class House{
     public House(String address, String city, String county, String postcode, 
             int lateFee, String description, int noRooms, String housetype, String pets, int LegalOcc){
         
-        this.address.setAddress(address);
-        this.address.setCity(city);
-        this.address.setCounty(county);
-        this.address.setPostcode(postcode);
+        this.address = new Address(address, city, county, postcode);
         this.lateFee = lateFee;
         this.description = description;
         this.noRooms = noRooms;
@@ -77,4 +71,54 @@ public class House{
     public String getPostcode(){
         return this.address.getPostcode();
     }
+
+    public int getLateFee() {
+        return lateFee;
+    }
+
+    public void setLateFee(int lateFee) {
+        this.lateFee = lateFee;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getNoRooms() {
+        return noRooms;
+    }
+
+    public void setNoRooms(int noRooms) {
+        this.noRooms = noRooms;
+    }
+
+    public String getHousetype() {
+        return housetype;
+    }
+
+    public void setHousetype(String housetype) {
+        this.housetype = housetype;
+    }
+
+    public String getPets() {
+        return pets;
+    }
+
+    public void setPets(String pets) {
+        this.pets = pets;
+    }
+
+    public int getLegalOcc() {
+        return legalOcc;
+    }
+
+    public void setLegalOcc(int legalOcc) {
+        this.legalOcc = legalOcc;
+    }
+    
+    
 }
