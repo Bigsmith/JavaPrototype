@@ -61,4 +61,8 @@ public class Landlord {
         return this.surname;
     }
     
+    private House getHouseAt(int index){
+        return this.houses.get(index);
+    }
+    
 }
