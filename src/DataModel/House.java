@@ -62,93 +62,238 @@ public class House{
         this.pets = pets;
         this.legalOcc = legalOcc;
     }
-    
+    /**
+     * Accessor for Address, setting the value of address and returning a Boolean
+     * value.
+     * @param address
+     * @return 
+     */
     public Boolean setAddress(String address){
         return this.address.setAddress(address); 
     }
     
+    /**
+     * Accessor for Address, returning its value.
+     * @return 
+     */
     public String getAddress(){
         return this.address.getAddress();
     }
     
+    /**
+     * Accessor for City, setting the value of city within the address variable.
+     * Returns a Boolean value.
+     * @param city
+     * @return 
+     */
     public Boolean setCity(String city){
         return this.address.setCity(city);
     }
     
+    /**
+     * Accessor for city, getting the value of city within the address variable.
+     * @return 
+     */
     public String getCity(){
         return this.address.getCity();
     }
     
+    /**
+     * Accessor for county, sets the value of county within the address variable.
+     * Returns boolean value depending on it's success.
+     * @param county
+     * @return 
+     */
     public Boolean setCounty(String county){
         return this.address.setCounty(county);
     }
     
+    /**
+     * Accessor for county, returns the value of county within the address variable.
+     * @return 
+     */
     public String getCounty(){
         return this.address.getCounty();
     }
+    
+    /**
+     * Accessor for postcode, sets the value of postcode within the address variable.
+     * Returns boolean value depending on it's success.
+     * @param postcode
+     * @return 
+     */
     public Boolean setPostcode(String postcode){
         return this.address.setPostcode(postcode);
     }
     
+    /**
+     * Accessor for the postcode, gets the value of postcode within the address variable.
+     * @return 
+     */
     public String getPostcode(){
         return this.address.getPostcode();
     }
 
+    /**
+     * Accessor for lateFee, returning it's value.
+     * @return 
+     */
     public int getLateFee() {
         return lateFee;
     }
 
-    public void setLateFee(int lateFee) {
+    /**
+     * Accessor for lateFree, setting it's value and returning a boolean depending
+     * on it's success.
+     * @param lateFee
+     * @return 
+     */
+    public Boolean setLateFee(int lateFee) {
+        Boolean isDone = false;
         this.lateFee = lateFee;
+        
+        if (this.lateFee == lateFee)
+            isDone = true;
+        
+        return isDone;
     }
 
+    /**
+     * Accessor for description, returning its value.
+     * @return 
+     */
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    /**
+     * Accessor for description, setting its value and returning a boolean value
+     * depending on it's success.
+     * @param description
+     * @return 
+     */
+    public Boolean setDescription(String description) {
+        Boolean isDone = false;
         this.description = description;
+        
+        if (this.description == description)
+            isDone = true;
+        
+        return isDone;
     }
 
+    /**
+     * Access for noRooms, returning it's value.
+     * @return 
+     */
     public int getNoRooms() {
         return noRooms;
     }
-
-    public void setNoRooms(int noRooms) {
+    
+    /**
+     * Accessor for noRooms, setting it's value and returning a boolean depending
+     * on its success.
+     * @param noRooms
+     * @return 
+     */
+    public Boolean setNoRooms(int noRooms) {
+        Boolean isDone = false;
         this.noRooms = noRooms;
+        
+        if (this.noRooms == noRooms)
+            isDone = true;
+        
+        return isDone;
     }
-
+    
+    /**
+     * Accessor for houseType, returning its value.
+     * @return 
+     */
     public String getHousetype() {
         return housetype;
     }
 
-    public void setHousetype(String housetype) {
+    /**
+     * Accessor for the houseType, setting its value and returning a boolean
+     * depending on it's value.
+     * @param housetype
+     * @return 
+     */
+    public Boolean setHousetype(String housetype) {
+        Boolean isDone = false;
         this.housetype = housetype;
+        
+        if(this.housetype == housetype)
+            isDone = true;
+        
+        return isDone;
     }
-
+    
+    /**
+     * Accessor for pets, returning it's value.
+     * @return 
+     */
     public String getPets() {
         return pets;
     }
 
-    public void setPets(String pets) {
+    /**
+     * Accessor for pets, setting it's value and returning a boolean depending
+     * on its success.
+     * @param pets
+     * @return 
+     */
+    public Boolean setPets(String pets) {
+        Boolean isDone = false;
         this.pets = pets;
+        
+        if (this.pets == pets)
+            isDone = true;
+        
+        return isDone;
     }
 
+    /**
+     * Accessor for legalOcc, returning its value.
+     * @return 
+     */
     public int getLegalOcc() {
         return legalOcc;
     }
 
-    public void setLegalOcc(int legalOcc) {
+    /**
+     * Accessor for legalOcc, setting its value and returning a boolean value
+     * depending on its success.
+     * @param legalOcc
+     * @return 
+     */
+    public Boolean setLegalOcc(int legalOcc) {
+        Boolean isDone = false;
         this.legalOcc = legalOcc;
+        
+        if (this.legalOcc == legalOcc)
+            isDone = true;
+        
+        return isDone;
     }
     
+    /**
+     * Accessor for lease, returning a lease in the leastList at a specific given lease.
+     * @param index
+     * @return 
+     */
     public Lease getLeaseAt(int index){
         return this.leaseList.get(index);
     }
     
+    /**
+     * Accessor for leastList, adding a least to the list and returning a boolean value 
+     * depending on its success.
+     * @param newLease
+     * @return 
+     */
     public Boolean addLease(Lease newLease){
         return this.leaseList.add(newLease);
     }
-    
-    
 }
