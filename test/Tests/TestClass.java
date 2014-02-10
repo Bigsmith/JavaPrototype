@@ -7,7 +7,7 @@
 package Tests;
 
 import DataModel.Classes.*;
-import LeaveRecords.Interfaces.IObserver;
+import DataModel.Interfaces.IObserver;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;

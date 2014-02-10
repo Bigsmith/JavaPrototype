@@ -6,8 +6,8 @@
 
 package DataModel.Classes;
 
-import LeaveRecords.Interfaces.IObserver;
-import LeaveRecords.Interfaces.ISubject;
+import DataModel.Interfaces.IObserver;
+import DataModel.Interfaces.ISubject;
 import java.util.ArrayList;
 
 /**
