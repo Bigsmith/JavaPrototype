@@ -7,6 +7,7 @@
 package Tests;
 
 import DataModel.Classes.*;
+import LeaveRecords.Interfaces.IObserver;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -35,6 +36,9 @@ public class TestClass {
     }
     
     public void generateData(){
+        IObserver observer = new AnObserver();
+        this.landlordList.registerObserver(observer);
+        
         this.newLandlord = new Landlord("Bob", "Bobson", "5 some road", "Some city"
         , "Devon", "PL1 5AZ");
         
@@ -49,14 +53,26 @@ public class TestClass {
     }
     
     public void addToModel(){
-        this.newHouse.addLease(newLease);
-        this.newLandlord.addHouse(newHouse);
+        
+        
+        System.out.println("Adding landlord to landlord list");
         this.landlordList.addLandlord(newLandlord);
+        System.out.println("Adding house to landlord");
+        this.landlordList.getLandlordAt(0).addHouse(newHouse);
+        System.out.println("Adding lease to house");
+        this.landlordList.getLandlordAt(0).getHouseAt(0).addLease(newLease);
     }
     
     public void displayData(){
         System.out.println(this.landlordList.getLandlordAt(0).getforename());
         System.out.println(this.landlordList.getLandlordAt(0).getHouseAt(0).getAddress());
         System.out.println(this.landlordList.getLandlordAt(0).getHouseAt(0).getLeaseAt(0).getRoom());
+    }
+    
+    private class AnObserver implements IObserver{
+
+        @Override
+        public void update() { System.out.println("State change detected."); }
+       
     }
 }

@@ -6,6 +6,8 @@
 
 package DataModel.Classes;
 
+import LeaveRecords.Interfaces.IObserver;
+import LeaveRecords.Interfaces.ISubject;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +16,9 @@ import java.util.ArrayList;
  * 
  * @author Thomas
  */
-public class Landlord {
+public class Landlord implements IObserver, ISubject{
     private ArrayList<House> houses = new ArrayList<House>();
+    private ArrayList<IObserver> observers = new ArrayList<>();
     private Address address;
     private String forename;
     private String surname;
@@ -53,9 +56,9 @@ public class Landlord {
      */
     public Landlord(String forename, String surname, String address,
             String city, String county, String postcode){
-        this.forename = forename;
-        this.surname = surname;
-        this.address = new Address(address, city, county, postcode);
+            this.forename = forename;
+            this.surname = surname;
+            this.address = new Address(address, city, county, postcode);
     }
     
     /**
@@ -71,6 +74,7 @@ public class Landlord {
         if (this.forename == forename)
             isDone = true;
         
+        this.notifyObservers();
         return isDone;
     }
     
@@ -87,6 +91,7 @@ public class Landlord {
         if(this.surname == surname)
             isDone = true;
         
+        this.notifyObservers();
         return isDone;
     }
     
@@ -123,7 +128,10 @@ public class Landlord {
      * @return 
      */
     public Boolean addHouse(House house){
-        return this.houses.add(house);
+        Boolean isDone = this.houses.add(house);
+        house.registerObserver(this);
+        this.notifyObservers();
+        return isDone;
     }
        
     /**
@@ -142,7 +150,9 @@ public class Landlord {
      * @return 
      */
     public Boolean setAddress(String address){
-        return this.address.setAddress(address);
+        Boolean isDone = this.address.setAddress(address);
+        this.notifyObservers();
+        return isDone;
     }
     
     /**
@@ -161,7 +171,9 @@ public class Landlord {
      * @return 
      */
     public Boolean setCity(String city){
-        return this.address.setCity(city);
+        Boolean isDone = this.address.setCity(city);
+        this.notifyObservers();
+        return isDone;
     }
     
     /**
@@ -180,7 +192,9 @@ public class Landlord {
      * @return 
      */
     public Boolean setCounty(String county){
-        return this.address.setCounty(county);
+        Boolean isDone = this.address.setCounty(county);
+        this.notifyObservers();
+        return isDone;
     }
     
     /**
@@ -199,6 +213,43 @@ public class Landlord {
      * @return 
      */
     public Boolean setPostcode(String postcode){
-        return this.address.setPostcode(postcode);
+        Boolean isDone = this.address.setPostcode(postcode);
+        this.notifyObservers();
+        return isDone;
+    }
+    
+    @Override
+    public void update() {
+        this.notifyObservers();
+    }
+
+    @Override
+    public boolean registerObserver(IObserver o) {
+        Boolean binAdded = false;
+        if (o != null) {
+            if (this.observers == null) { 
+                this.observers = new ArrayList<>();
+            }
+            binAdded = this.observers.add(o);
+        }
+        return binAdded;
+    }
+
+    @Override
+    public boolean removeObserver(IObserver o) {
+        Boolean binRemoved = false;
+        if (o != null) {
+            binRemoved = this.observers.remove(o);
+        }
+        return binRemoved;
+    }
+
+    @Override
+    public void notifyObservers() {
+        if (this.observers != null && this.observers.size() > 0) {
+            for (IObserver currentObserver : this.observers) {
+                currentObserver.update();
+            }
+        }
     }
 }

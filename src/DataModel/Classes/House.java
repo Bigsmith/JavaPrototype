@@ -6,14 +6,17 @@
 
 package DataModel.Classes;
 
+import LeaveRecords.Interfaces.IObserver;
+import LeaveRecords.Interfaces.ISubject;
 import java.util.ArrayList;
 
 /**
  * 
  * @author Thomas
  */
-public class House{
+public class House implements IObserver, ISubject{
     private ArrayList<Lease> leaseList = new ArrayList<Lease>();
+    private ArrayList<IObserver> observers = new ArrayList<>();
     private Address address;
     private int lateFee;
     private String description;
@@ -69,7 +72,9 @@ public class House{
      * @return 
      */
     public Boolean setAddress(String address){
-        return this.address.setAddress(address); 
+        Boolean isDone = this.address.setAddress(address); 
+        this.notifyObservers();
+        return isDone;
     }
     
     /**
@@ -87,7 +92,9 @@ public class House{
      * @return 
      */
     public Boolean setCity(String city){
-        return this.address.setCity(city);
+        Boolean isDone = this.address.setCity(city);
+        this.notifyObservers();
+        return isDone;
     }
     
     /**
@@ -105,7 +112,9 @@ public class House{
      * @return 
      */
     public Boolean setCounty(String county){
-        return this.address.setCounty(county);
+        Boolean isDone = this.address.setCounty(county);
+        this.notifyObservers();
+        return isDone;
     }
     
     /**
@@ -123,7 +132,9 @@ public class House{
      * @return 
      */
     public Boolean setPostcode(String postcode){
-        return this.address.setPostcode(postcode);
+        Boolean isDone = this.address.setPostcode(postcode);
+        this.notifyObservers();
+        return isDone;
     }
     
     /**
@@ -155,6 +166,7 @@ public class House{
         if (this.lateFee == lateFee)
             isDone = true;
         
+        this.notifyObservers();
         return isDone;
     }
 
@@ -179,6 +191,7 @@ public class House{
         if (this.description == description)
             isDone = true;
         
+        this.notifyObservers();
         return isDone;
     }
 
@@ -203,6 +216,7 @@ public class House{
         if (this.noRooms == noRooms)
             isDone = true;
         
+        this.notifyObservers();
         return isDone;
     }
     
@@ -227,6 +241,7 @@ public class House{
         if(this.housetype == housetype)
             isDone = true;
         
+        this.notifyObservers();
         return isDone;
     }
     
@@ -251,6 +266,7 @@ public class House{
         if (this.pets == pets)
             isDone = true;
         
+        this.notifyObservers();
         return isDone;
     }
 
@@ -275,6 +291,7 @@ public class House{
         if (this.legalOcc == legalOcc)
             isDone = true;
         
+        this.notifyObservers();
         return isDone;
     }
     
@@ -294,6 +311,44 @@ public class House{
      * @return 
      */
     public Boolean addLease(Lease newLease){
-        return this.leaseList.add(newLease);
+        Boolean isDone = this.leaseList.add(newLease);
+        newLease.registerObserver(this);
+        this.notifyObservers();
+        return isDone;   
+    }
+    
+    @Override
+    public boolean registerObserver(IObserver o) {
+        Boolean binAdded = false;
+        if (o != null) {
+            if (this.observers == null) { 
+                this.observers = new ArrayList<>();
+            }
+            binAdded = this.observers.add(o);
+        }
+        return binAdded;
+    }
+
+    @Override
+    public boolean removeObserver(IObserver o) {
+        Boolean binRemoved = false;
+        if (o != null) {
+            binRemoved = this.observers.remove(o);
+        }
+        return binRemoved;
+    }
+
+    @Override
+    public void notifyObservers() {
+        if (this.observers != null && this.observers.size() > 0) {
+            for (IObserver currentObserver : this.observers) {
+                currentObserver.update();
+            }
+        }
+    }
+
+    @Override
+    public void update() {
+        this.notifyObservers();
     }
 }
