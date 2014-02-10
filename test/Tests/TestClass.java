@@ -32,7 +32,7 @@ public class TestClass {
     public void runTests(){
         this.generateData();
         this.addToModel();
-        this.displayData();
+        this.editData();
     }
     
     public void generateData(){
@@ -61,10 +61,17 @@ public class TestClass {
         this.landlordList.getLandlordAt(0).getHouseAt(0).addLease(newLease);
     }
     
-    public void displayData(){
-        System.out.println(this.landlordList.getLandlordAt(0).getforename());
-        System.out.println(this.landlordList.getLandlordAt(0).getHouseAt(0).getAddress());
-        System.out.println(this.landlordList.getLandlordAt(0).getHouseAt(0).getLeaseAt(0).getRoom());
+    public void editData(){
+        System.out.println("Editing lease rate");
+        this.landlordList.getLandlordAt(0).getHouseAt(0).getLeaseAt(0).setMonthlyRate(80);
+        System.out.println("Editing house number");
+        this.landlordList.getLandlordAt(0).getHouseAt(0).setAddress("10 Wyndham Square");
+        System.out.println("Editing number of legal occupants");
+        this.landlordList.getLandlordAt(0).getHouseAt(0).setLegalOcc(6);
+        System.out.println("Editing landlord forename");
+        this.landlordList.getLandlordAt(0).setforename("John");
+        System.out.println("Editing Landlord surname");
+        this.landlordList.getLandlordAt(0).setSurname("Johnson");
     }
     
     private class AnObserver implements IObserver{

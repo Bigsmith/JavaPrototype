@@ -62,6 +62,18 @@ public class Landlord implements IObserver, ISubject{
     }
     
     /**
+     * Constructor for landlord that takes an Address object.
+     * @param forename
+     * @param surname
+     * @param address 
+     */
+    public Landlord(String forename, String surname, Address address){
+        this.forename = forename;
+        this.surname = surname;
+        this.address = address;
+    }
+    
+    /**
      * Acessor for forename, setting the value of forename and return a boolean
      * value indicating if it's successful.
      * @param forename
