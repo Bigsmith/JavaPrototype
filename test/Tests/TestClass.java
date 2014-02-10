@@ -53,8 +53,6 @@ public class TestClass {
     }
     
     public void addToModel(){
-        
-        
         System.out.println("Adding landlord to landlord list");
         this.landlordList.addLandlord(newLandlord);
         System.out.println("Adding house to landlord");
