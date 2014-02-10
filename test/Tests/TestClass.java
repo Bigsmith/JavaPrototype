@@ -6,7 +6,7 @@
 
 package Tests;
 
-import DataModel.*;
+import DataModel.Classes.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;

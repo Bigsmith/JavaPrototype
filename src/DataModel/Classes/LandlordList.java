@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package DataModel;
+package DataModel.Classes;
 
 import java.util.ArrayList;
 
