@@ -23,6 +23,7 @@ public class Landlord implements IObserver, ISubject{
     private Address address;
     private String forename;
     private String surname;
+    private String emailAddress;
     
     /**
      * Default constructor takes no arguments and passes no arguments to address.
@@ -39,10 +40,11 @@ public class Landlord implements IObserver, ISubject{
      * @param forename
      * @param surname 
      */
-    public Landlord(String forename, String surname){
+    public Landlord(String forename, String surname, String emailAddress){
         this.forename = forename;
         this.surname = surname;
         this.address = new Address();
+        this.emailAddress = emailAddress;
     }
     
     /**
@@ -56,10 +58,11 @@ public class Landlord implements IObserver, ISubject{
      * @param postcode 
      */
     public Landlord(String forename, String surname, String address,
-            String city, String county, String postcode){
+            String city, String county, String postcode, String emailAddress){
             this.forename = forename;
             this.surname = surname;
             this.address = new Address(address, city, county, postcode);
+            this.emailAddress = emailAddress;
     }
     
     /**
@@ -68,10 +71,11 @@ public class Landlord implements IObserver, ISubject{
      * @param surname
      * @param address 
      */
-    public Landlord(String forename, String surname, Address address){
+    public Landlord(String forename, String surname, Address address, String emailAddress){
         this.forename = forename;
         this.surname = surname;
         this.address = address;
+        this.emailAddress = emailAddress;
     }
     
     /**
@@ -145,6 +149,22 @@ public class Landlord implements IObserver, ISubject{
         house.registerObserver(this);
         this.notifyObservers();
         return isDone;
+    }
+    
+    public Boolean setEmail(String emailAddress){
+        Boolean isDone = false;
+        this.emailAddress = emailAddress;
+        
+        if (this.emailAddress.equals(emailAddress))
+            isDone = true;
+        
+        this.notifyObservers();
+        
+        return isDone;
+    }
+    
+    public String getEmail(){
+        return this.emailAddress;
     }
        
     /**

@@ -37,6 +37,14 @@ public class LandlordList implements IObserver, ISubject{
         return this.list;
     }
     
+    public Boolean deleteLandlord(Landlord togo){
+        Boolean isDone = this.list.remove(togo);
+        if (isDone == true)
+            this.notifyObservers();
+        
+        return isDone;
+    }   
+    
     @Override
     public void update() {
         this.notifyObservers();

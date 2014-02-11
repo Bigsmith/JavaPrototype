@@ -40,7 +40,7 @@ public class TestClass {
         this.landlordList.registerObserver(observer);
         
         this.newLandlord = new Landlord("Bob", "Bobson", "5 some road", "Some city"
-        , "Devon", "PL1 5AZ");
+        , "Devon", "PL1 5AZ","thomassmith@tshs.info");
         
         this.newHouse = new House("8 Wyndham Square", "Plymouth", "Devon", "PL1 5EF"
                 , 10, "It's a house", 6, "old", "yes", 8);

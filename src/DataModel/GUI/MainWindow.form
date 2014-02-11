@@ -2,6 +2,11 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.JTextField" name="jTextField3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -40,12 +45,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="1" pref="997" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+          <Component id="jScrollPane1" alignment="1" pref="741" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -70,37 +75,331 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="204" max="-2" attributes="0"/>
-                          <EmptySpace pref="776" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="listPane" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                              <Component id="landlordTitle" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="llforenamelbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="clearLandlordfitlerbtn" min="-2" pref="121" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="landlordFilterbtn" min="-2" pref="121" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="landlordNamelbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="NoProplbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="landlordAddresslbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="landlordAddressInp" alignment="0" pref="258" max="32767" attributes="0"/>
+                                          <Component id="landlordNameInp" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="landlordPropInp" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="landlordEmaillbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="landlordEmailInp" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="landlordFilterTitle" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="landlordTitle2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llSurnamelbl" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llEmailAddresslbl" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="llEmailAddresstxt" alignment="0" pref="258" max="32767" attributes="0"/>
+                                          <Component id="llForenametxt" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="llSurnametxt" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="llAddresstxt" min="-2" pref="284" max="-2" attributes="0"/>
+                                      <Component id="llCitytxt" min="-2" pref="284" max="-2" attributes="0"/>
+                                      <Component id="llCountytxt" min="-2" pref="284" max="-2" attributes="0"/>
+                                      <Component id="llCitylbl" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llAddresslbl" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llCountylbl" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llPostcodelbl" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llPostcodetxt" min="-2" pref="284" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="SaveLandlordChangesbtn" min="-2" pref="122" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="AddnewLandlordbtn" min="-2" pref="122" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="deleteLandlordbtn" min="-2" pref="122" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="602" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="681" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="landlordTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="landlordTitle2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="llforenamelbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llAddresslbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="llForenametxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llAddresstxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="llSurnamelbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llCitylbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="llSurnametxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="llCitytxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="SaveLandlordChangesbtn" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                          <Component id="AddnewLandlordbtn" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                          <Component id="deleteLandlordbtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="llCountylbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="llEmailAddresslbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="llCountytxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="llEmailAddresstxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="llPostcodelbl" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="llPostcodetxt" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="landlordFilterTitle" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordNamelbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordNameInp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="NoProplbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordPropInp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordAddresslbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordAddressInp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordEmaillbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordEmailInp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="clearLandlordfitlerbtn" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="landlordFilterbtn" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="listPane" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                <Container class="javax.swing.JScrollPane" name="listPane">
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JList" name="jList1">
+                    <Component class="javax.swing.JList" name="landlordListview">
                       <Properties>
                         <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="landlordList" type="code"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="landlordListviewMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="clearLandlordfitlerbtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Clear"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordTitle">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="18" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Landlords"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordFilterTitle">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="18" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Filter Options"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordNamelbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Landlord Name:"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="landlordNameInp">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="landlordNameInpActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="NoProplbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Number of properties:"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="landlordPropInp">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordAddresslbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Landlord Address:"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="landlordAddressInp">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordEmaillbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Landlord Email address:"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="landlordEmailInp">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="landlordFilterbtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Filter List"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="landlordFilterbtnActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordTitle2">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="18" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Landlord Details"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="llforenamelbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Forname:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="llSurnamelbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Surname:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="llAddresslbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Address line 1:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="llCitylbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="City:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="llCountylbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="County:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="llPostcodelbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Postcode:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="llForenametxt">
+                </Component>
+                <Component class="javax.swing.JTextField" name="llSurnametxt">
+                </Component>
+                <Component class="javax.swing.JTextField" name="llAddresstxt">
+                </Component>
+                <Component class="javax.swing.JTextField" name="llCitytxt">
+                </Component>
+                <Component class="javax.swing.JTextField" name="llCountytxt">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="llCountytxtActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="llPostcodetxt">
+                </Component>
+                <Component class="javax.swing.JButton" name="SaveLandlordChangesbtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Save Changes"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveLandlordChangesbtnActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="AddnewLandlordbtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Add New Landlord"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddnewLandlordbtnActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="llEmailAddresstxt">
+                </Component>
+                <Component class="javax.swing.JLabel" name="llEmailAddresslbl">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Email Address:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="deleteLandlordbtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Delete Selected"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteLandlordbtnActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="propertiesTab">
@@ -115,15 +414,196 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="990" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="addNewLandlordbtn1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="viewEditLandlordbtn1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="1196" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="landlordTitle1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane3" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="landlordNamelbl1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="landlordFilterTitle1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="NoProplbl1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="landlordAddresslbl1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="landlordAddressInp1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="landlordNameInp1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="landlordPropInp1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="landlordEmaillbl1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="landlordEmailInp1" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="clearLandlordfitlerbtn1" min="-2" pref="121" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="landlordFilterbtn1" min="-2" pref="121" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="703" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="landlordTitle1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="landlordFilterTitle1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane3" alignment="0" min="-2" pref="594" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="landlordNamelbl1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordNameInp1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="NoProplbl1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordPropInp1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordAddresslbl1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordAddressInp1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordEmaillbl1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordEmailInp1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="clearLandlordfitlerbtn1" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="landlordFilterbtn1" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="addNewLandlordbtn1" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="viewEditLandlordbtn1" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="39" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="landlordEmaillbl1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Landlord Email address:"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="landlordEmailInp1">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordAddresslbl1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Landlord Address:"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="landlordAddressInp1">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="NoProplbl1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Number of properties:"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="landlordPropInp1">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="viewEditLandlordbtn1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="View/Edit Landlord"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="landlordNameInp1">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="landlordNameInp1ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordNamelbl1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Landlord Name:"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordFilterTitle1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="18" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Filter Options"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JList" name="landlordListview1">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="landlordList" type="code"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Component class="javax.swing.JButton" name="landlordFilterbtn1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Filter List"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="landlordFilterbtn1ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="landlordTitle1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="18" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Landlords"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="clearLandlordfitlerbtn1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Clear"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="addNewLandlordbtn1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Add New Landlord"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addNewLandlordbtn1ActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="tenantsTab">
               <Properties>
@@ -140,12 +620,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="990" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1452" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="703" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="721" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -165,12 +645,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="990" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1452" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="703" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="721" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -190,12 +670,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="990" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1452" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="703" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="721" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
