@@ -78,57 +78,59 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="listPane" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
-                              <Component id="landlordTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="landlordNamelbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="NoProplbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="landlordAddresslbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="landlordEmaillbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="landlordFilterTitle" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="llforenamelbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="clearLandlordfitlerbtn" min="-2" pref="121" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="landlordFilterbtn" min="-2" pref="121" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="landlordNamelbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="NoProplbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="landlordAddresslbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="landlordAddressInp" alignment="0" pref="258" max="32767" attributes="0"/>
-                                          <Component id="landlordNameInp" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="landlordPropInp" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="landlordEmaillbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="landlordEmailInp" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="landlordFilterTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="landlordTitle2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="llSurnamelbl" min="-2" max="-2" attributes="0"/>
-                                      <Component id="llEmailAddresslbl" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="llEmailAddresstxt" alignment="0" pref="258" max="32767" attributes="0"/>
-                                          <Component id="llForenametxt" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="llSurnametxt" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="llAddresstxt" min="-2" pref="284" max="-2" attributes="0"/>
-                                      <Component id="llCitytxt" min="-2" pref="284" max="-2" attributes="0"/>
-                                      <Component id="llCountytxt" min="-2" pref="284" max="-2" attributes="0"/>
-                                      <Component id="llCitylbl" min="-2" max="-2" attributes="0"/>
-                                      <Component id="llAddresslbl" min="-2" max="-2" attributes="0"/>
-                                      <Component id="llCountylbl" min="-2" max="-2" attributes="0"/>
-                                      <Component id="llPostcodelbl" min="-2" max="-2" attributes="0"/>
-                                      <Component id="llPostcodetxt" min="-2" pref="284" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="clearLandlordfitlerbtn" min="-2" pref="121" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="landlordFilterbtn" min="-2" pref="121" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="SaveLandlordChangesbtn" min="-2" pref="122" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="AddnewLandlordbtn" min="-2" pref="122" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="deleteLandlordbtn" min="-2" pref="122" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="landlordEmailInp" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="landlordAddressInp" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="landlordPropInp" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="landlordNameInp" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="listPane" alignment="0" pref="244" max="32767" attributes="0"/>
+                                      <Component id="landlordTitle" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="llforenamelbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="landlordTitle2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="llSurnamelbl" min="-2" max="-2" attributes="0"/>
+                                              <Component id="llEmailAddresslbl" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="llEmailAddresstxt" alignment="0" pref="258" max="32767" attributes="0"/>
+                                                  <Component id="llForenametxt" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="llSurnametxt" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="llAddresstxt" min="-2" pref="284" max="-2" attributes="0"/>
+                                              <Component id="llCitytxt" min="-2" pref="284" max="-2" attributes="0"/>
+                                              <Component id="llCountytxt" min="-2" pref="284" max="-2" attributes="0"/>
+                                              <Component id="llCitylbl" min="-2" max="-2" attributes="0"/>
+                                              <Component id="llAddresslbl" min="-2" max="-2" attributes="0"/>
+                                              <Component id="llCountylbl" min="-2" max="-2" attributes="0"/>
+                                              <Component id="llPostcodelbl" min="-2" max="-2" attributes="0"/>
+                                              <Component id="llPostcodetxt" min="-2" pref="284" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="SaveLandlordChangesbtn" min="-2" pref="122" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="AddnewLandlordbtn" min="-2" pref="122" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="deleteLandlordbtn" min="-2" pref="122" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace pref="602" max="32767" attributes="0"/>
@@ -189,33 +191,33 @@
                                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="landlordFilterTitle" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="landlordNamelbl" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="landlordNameInp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="NoProplbl" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="landlordPropInp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="landlordAddresslbl" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="landlordAddressInp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="landlordEmaillbl" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="landlordEmailInp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="clearLandlordfitlerbtn" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                                      <Component id="landlordFilterbtn" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
-                              <Component id="listPane" max="32767" attributes="0"/>
+                              <Component id="listPane" alignment="0" min="-2" pref="382" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="landlordFilterTitle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="landlordNamelbl" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="landlordNameInp" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="NoProplbl" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="landlordPropInp" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="landlordAddresslbl" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="landlordAddressInp" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="landlordEmaillbl" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="landlordEmailInp" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="clearLandlordfitlerbtn" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="landlordFilterbtn" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="39" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
