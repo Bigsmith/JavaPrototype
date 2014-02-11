@@ -33,6 +33,10 @@ public class LandlordList implements IObserver, ISubject{
         return this.list.get(index);
     }
     
+    public ArrayList<Landlord> getList(){
+        return this.list;
+    }
+    
     @Override
     public void update() {
         this.notifyObservers();

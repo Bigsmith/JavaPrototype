@@ -231,6 +231,10 @@ public class Landlord implements IObserver, ISubject{
         return isDone;
     }
     
+    public String getFullname(){
+        return this.surname + ", " + this.forename;
+    }
+    
     @Override
     public void update() {
         this.notifyObservers();

@@ -6,19 +6,37 @@
 
 package DataModel.GUI;
 
-import javax.swing.JTable;
+import DataModel.Classes.Address;
+import DataModel.Classes.Landlord;
+import DataModel.Classes.LandlordList;
+import DataModel.Interfaces.IObserver;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author Thomas
  */
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame implements IObserver{
 
+    private DefaultListModel landlordList;
+    private LandlordList list;
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
+        this.landlordList = new DefaultListModel();
+        this.list = new LandlordList();
+        this.refreshListModel();
+        list.registerObserver(this);
         initComponents();
+        this.testData();
+    }
+    
+    private void refreshListModel(){
+        this.landlordList.clear();
+        for (Landlord currLandlord : this.list.getList()){
+            this.landlordList.addElement(currLandlord.getFullname());
+        }
     }
 
     /**
@@ -34,6 +52,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainTab = new javax.swing.JTabbedPane();
         landlordTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         propertiesTab = new javax.swing.JPanel();
         tenantsTab = new javax.swing.JPanel();
         enquiriesTab = new javax.swing.JPanel();
@@ -44,14 +63,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jList1.setModel(landlordList);
+        jScrollPane2.setViewportView(jList1);
+
         javax.swing.GroupLayout landlordTabLayout = new javax.swing.GroupLayout(landlordTab);
         landlordTab.setLayout(landlordTabLayout);
         landlordTabLayout.setHorizontalGroup(
             landlordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(landlordTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(707, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(776, Short.MAX_VALUE))
         );
         landlordTabLayout.setVerticalGroup(
             landlordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,10 +202,15 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
     
+    private void testData(){
+        this.list.addLandlord(new Landlord("Thomas","Smith", 
+                new Address("8 Wyndham Sqaure", "Plymouth", "Devon", "PL1 5EF")));
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel enquiriesTab;
+    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -195,4 +222,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel repairsTab;
     private javax.swing.JPanel tenantsTab;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update() {
+       this.refreshListModel();
+    }
 }
