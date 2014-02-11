@@ -945,10 +945,12 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
 
     private void AddnewLandlordbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddnewLandlordbtnActionPerformed
         this.addLandlord();
+        this.clearInput();
     }//GEN-LAST:event_AddnewLandlordbtnActionPerformed
 
     private void SaveLandlordChangesbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLandlordChangesbtnActionPerformed
         this.saveChanges(this.landlordListview.getSelectedIndex());
+        this.displayData(this.landlordListview.getSelectedIndex());
     }//GEN-LAST:event_SaveLandlordChangesbtnActionPerformed
 
     private void llCountytxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_llCountytxtActionPerformed
@@ -1058,6 +1060,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
     }
     
     private void populateProperties(){
+        this.houseList.clear();
         Landlord landlord = this.list.getLandlordAt(this.landlordListview2.getSelectedIndex());
         for (House currHouse : landlord.getHouses()){
             this.houseList.addElement(currHouse.getAddressObject().getAsString());
@@ -1106,6 +1109,16 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
             JOptionPane.showMessageDialog(this, "Email already on system",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    private void clearInput(){
+        this.llAddresstxt.setText("");
+        this.llCitytxt.setText("");
+        this.llCountytxt.setText("");
+        this.llForenametxt.setText("");
+        this.llSurnametxt.setText("");
+        this.llPostcodetxt.setText("");
+        this.llEmailAddresstxt.setText("");
     }
     
     private void deleteLandlord(Landlord togo){
