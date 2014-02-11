@@ -683,6 +683,11 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         });
 
         clearLeaseDetailsbtn.setText("Clear Lease Details");
+        clearLeaseDetailsbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearLeaseDetailsbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout propertiesTabLayout = new javax.swing.GroupLayout(propertiesTab);
         propertiesTab.setLayout(propertiesTabLayout);
@@ -1199,6 +1204,10 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
     private void deleteLeasebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLeasebtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteLeasebtnActionPerformed
+
+    private void clearLeaseDetailsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearLeaseDetailsbtnActionPerformed
+        this.clearLeaseInput();
+    }//GEN-LAST:event_clearLeaseDetailsbtnActionPerformed
 
     /**
      * @param args the command line arguments
