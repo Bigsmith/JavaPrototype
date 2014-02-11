@@ -10,7 +10,12 @@ import DataModel.Classes.Address;
 import DataModel.Classes.House;
 import DataModel.Classes.Landlord;
 import DataModel.Classes.LandlordList;
+import DataModel.Classes.Lease;
 import DataModel.Interfaces.IObserver;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -21,14 +26,16 @@ import javax.swing.JOptionPane;
 public class MainWindow extends javax.swing.JFrame implements IObserver{
 
     private DefaultListModel landlordList;
-    private LandlordList list;
     private DefaultListModel houseList;
+    private DefaultListModel leaseList;
+    private LandlordList list;
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         this.landlordList = new DefaultListModel();
         this.houseList = new DefaultListModel();
+        this.leaseList = new DefaultListModel();
         this.list = new LandlordList();
         this.refreshListModel();
         list.registerObserver(this);
@@ -41,6 +48,16 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         for (Landlord currLandlord : this.list.getList()){
             this.landlordList.addElement(currLandlord.getFullname());
         }
+        this.houseList.clear();
+        this.leaseList.clear();
+        
+        try{
+            this.populateProperties();
+            this.populateLeaseList(this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).getHouseAt(this.houseViewList.getSelectedIndex()));
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException ex){
+            
+        }
+
     }
 
     /**
@@ -88,6 +105,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         llEmailAddresstxt = new javax.swing.JTextField();
         llEmailAddresslbl = new javax.swing.JLabel();
         deleteLandlordbtn = new javax.swing.JButton();
+        ClearLandlordDetails = new javax.swing.JButton();
         propertiesTab = new javax.swing.JPanel();
         landlordEmaillbl1 = new javax.swing.JLabel();
         landlordEmailInp1 = new javax.swing.JTextField();
@@ -115,7 +133,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         landlordFilterTitle2 = new javax.swing.JLabel();
         landlordTitle3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        houseViewList = new javax.swing.JList();
         landlordTitle4 = new javax.swing.JLabel();
         landlordEmaillbl3 = new javax.swing.JLabel();
         landlordPropInp3 = new javax.swing.JTextField();
@@ -130,30 +148,45 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         landlordFilterTitle3 = new javax.swing.JLabel();
         landlordTitle5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        houseAddresstxt = new javax.swing.JTextField();
+        houseCitytxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        houseCountytxt = new javax.swing.JTextField();
+        housePostcodetxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        houseLatefeetxt = new javax.swing.JTextField();
+        houseRoomNotxt = new javax.swing.JTextField();
+        houseLatefeeLbl = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        housePetstxt = new javax.swing.JTextField();
+        houseTypetxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        houseLegOcctxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        deleteLandlordbtn1 = new javax.swing.JButton();
-        AddnewLandlordbtn1 = new javax.swing.JButton();
-        SaveLandlordChangesbtn1 = new javax.swing.JButton();
-        deleteLandlordbtn2 = new javax.swing.JButton();
+        houseDesctxt = new javax.swing.JTextPane();
+        deleteSelectedPropertybtn = new javax.swing.JButton();
+        SaveNewPropertybtn = new javax.swing.JButton();
+        SavePropertyChangesbtn = new javax.swing.JButton();
+        landlordTitle6 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        leaseListview = new javax.swing.JList();
+        jLabel11 = new javax.swing.JLabel();
+        startDatedc = new com.toedter.calendar.JDateChooser();
+        jLabel12 = new javax.swing.JLabel();
+        endDatadc = new com.toedter.calendar.JDateChooser();
+        jLabel13 = new javax.swing.JLabel();
+        monthlyRatetxt = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        roomTxt = new javax.swing.JTextField();
+        clearPropertyDetailsbtn = new javax.swing.JButton();
+        saveLeasechangesbtn = new javax.swing.JButton();
+        saveNewleasebtn = new javax.swing.JButton();
+        deleteLeasebtn = new javax.swing.JButton();
+        clearLeaseDetailsbtn = new javax.swing.JButton();
         tenantsTab = new javax.swing.JPanel();
         enquiriesTab = new javax.swing.JPanel();
         repairsTab = new javax.swing.JPanel();
@@ -260,6 +293,13 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
             }
         });
 
+        ClearLandlordDetails.setText("Clear Details");
+        ClearLandlordDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearLandlordDetailsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout landlordTabLayout = new javax.swing.GroupLayout(landlordTab);
         landlordTab.setLayout(landlordTabLayout);
         landlordTabLayout.setHorizontalGroup(
@@ -311,8 +351,10 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(AddnewLandlordbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteLandlordbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(1501, Short.MAX_VALUE))
+                                .addComponent(deleteLandlordbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ClearLandlordDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(1573, Short.MAX_VALUE))
         );
         landlordTabLayout.setVerticalGroup(
             landlordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,7 +386,8 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
                             .addGroup(landlordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(SaveLandlordChangesbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(AddnewLandlordbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(deleteLandlordbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(deleteLandlordbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ClearLandlordDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(landlordTabLayout.createSequentialGroup()
                                 .addGroup(landlordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(llCountylbl)
@@ -477,11 +520,16 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         landlordTitle3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         landlordTitle3.setText("Landlords");
 
-        jList1.setModel(houseList);
-        jScrollPane2.setViewportView(jList1);
+        houseViewList.setModel(houseList);
+        houseViewList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                houseViewListMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(houseViewList);
 
         landlordTitle4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        landlordTitle4.setText("Properties");
+        landlordTitle4.setText("Property Details:");
 
         landlordEmaillbl3.setText("Postcode:");
         landlordEmaillbl3.setEnabled(false);
@@ -528,9 +576,9 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
 
         jLabel2.setText("Address line 1:");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        houseCitytxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                houseCitytxtActionPerformed(evt);
             }
         });
 
@@ -538,9 +586,9 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
 
         jLabel4.setText("County:");
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        housePostcodetxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                housePostcodetxtActionPerformed(evt);
             }
         });
 
@@ -548,13 +596,13 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
 
         jLabel6.setText("Number of Rooms:");
 
-        jLabel7.setText("Late fee:");
+        houseLatefeeLbl.setText("Late fee:");
 
         jLabel8.setText("House Type:");
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        housePetstxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                housePetstxtActionPerformed(evt);
             }
         });
 
@@ -564,35 +612,77 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
 
         jLabel1.setText("Description:");
 
-        jScrollPane3.setViewportView(jTextPane1);
+        jScrollPane3.setViewportView(houseDesctxt);
 
-        deleteLandlordbtn1.setText("Delete Selected");
-        deleteLandlordbtn1.addActionListener(new java.awt.event.ActionListener() {
+        deleteSelectedPropertybtn.setText("Delete Selected");
+        deleteSelectedPropertybtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteLandlordbtn1ActionPerformed(evt);
+                deleteSelectedPropertybtnActionPerformed(evt);
             }
         });
 
-        AddnewLandlordbtn1.setText("Add New Landlord");
-        AddnewLandlordbtn1.addActionListener(new java.awt.event.ActionListener() {
+        SaveNewPropertybtn.setText("Save as new");
+        SaveNewPropertybtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddnewLandlordbtn1ActionPerformed(evt);
+                SaveNewPropertybtnActionPerformed(evt);
             }
         });
 
-        SaveLandlordChangesbtn1.setText("Save Changes");
-        SaveLandlordChangesbtn1.addActionListener(new java.awt.event.ActionListener() {
+        SavePropertyChangesbtn.setText("Save Changes");
+        SavePropertyChangesbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveLandlordChangesbtn1ActionPerformed(evt);
+                SavePropertyChangesbtnActionPerformed(evt);
             }
         });
 
-        deleteLandlordbtn2.setText("Manage Leases");
-        deleteLandlordbtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteLandlordbtn2ActionPerformed(evt);
+        landlordTitle6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        landlordTitle6.setText("Leases:");
+
+        leaseListview.setModel(leaseList);
+        leaseListview.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                leaseListviewMouseClicked(evt);
             }
         });
+        jScrollPane4.setViewportView(leaseListview);
+
+        jLabel11.setText("Start Date:");
+
+        jLabel12.setText("End Date:");
+
+        jLabel13.setText("Monthly  Rate (£):");
+
+        jLabel14.setText("Room:");
+
+        clearPropertyDetailsbtn.setText("Clear Details");
+        clearPropertyDetailsbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearPropertyDetailsbtnActionPerformed(evt);
+            }
+        });
+
+        saveLeasechangesbtn.setText("Save Lease Changes");
+        saveLeasechangesbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveLeasechangesbtnActionPerformed(evt);
+            }
+        });
+
+        saveNewleasebtn.setText("Save Lease as new");
+        saveNewleasebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveNewleasebtnActionPerformed(evt);
+            }
+        });
+
+        deleteLeasebtn.setText("Delete Selected Lease");
+        deleteLeasebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteLeasebtnActionPerformed(evt);
+            }
+        });
+
+        clearLeaseDetailsbtn.setText("Clear Lease Details");
 
         javax.swing.GroupLayout propertiesTabLayout = new javax.swing.GroupLayout(propertiesTab);
         propertiesTab.setLayout(propertiesTabLayout);
@@ -652,7 +742,26 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
                 .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(propertiesTabLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(landlordTitle4))
+                        .addComponent(landlordTitle4)
+                        .addGap(470, 470, 470)
+                        .addComponent(landlordTitle6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(landlordNamelbl1)
+                                .addComponent(landlordFilterTitle1)
+                                .addComponent(NoProplbl1)
+                                .addComponent(landlordAddresslbl1)
+                                .addComponent(landlordAddressInp1)
+                                .addComponent(landlordNameInp1)
+                                .addComponent(landlordPropInp1)
+                                .addComponent(landlordEmaillbl1)
+                                .addComponent(landlordEmailInp1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(propertiesTabLayout.createSequentialGroup()
+                                .addComponent(clearLandlordfitlerbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(landlordFilterbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(174, 174, 174))
                     .addGroup(propertiesTabLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -664,26 +773,26 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
                                         .addComponent(jLabel4)
                                         .addComponent(jLabel5)
                                         .addComponent(jLabel9)
-                                        .addComponent(jTextField1)
-                                        .addComponent(jTextField2)
-                                        .addComponent(jTextField4)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                                        .addComponent(houseAddresstxt)
+                                        .addComponent(houseCitytxt)
+                                        .addComponent(houseCountytxt)
+                                        .addComponent(housePostcodetxt, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                                     .addGroup(propertiesTabLayout.createSequentialGroup()
                                         .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                                            .addComponent(houseLatefeeLbl)
+                                            .addComponent(houseLatefeetxt, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextField7))
+                                            .addComponent(houseRoomNotxt))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextField10)))
+                                            .addComponent(houseLegOcctxt)))
                                     .addComponent(jLabel8)
                                     .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.LEADING)))
+                                        .addComponent(housePetstxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                        .addComponent(houseTypetxt, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(propertiesTabLayout.createSequentialGroup()
                                         .addGap(9, 9, 9)
@@ -692,29 +801,38 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(propertiesTabLayout.createSequentialGroup()
-                                .addComponent(SaveLandlordChangesbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(SavePropertyChangesbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AddnewLandlordbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(SaveNewPropertybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteLandlordbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(deleteLandlordbtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 771, Short.MAX_VALUE)
-                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(landlordNamelbl1)
-                        .addComponent(landlordFilterTitle1)
-                        .addComponent(NoProplbl1)
-                        .addComponent(landlordAddresslbl1)
-                        .addComponent(landlordAddressInp1)
-                        .addComponent(landlordNameInp1)
-                        .addComponent(landlordPropInp1)
-                        .addComponent(landlordEmaillbl1)
-                        .addComponent(landlordEmailInp1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(propertiesTabLayout.createSequentialGroup()
-                        .addComponent(clearLandlordfitlerbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(deleteSelectedPropertybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clearPropertyDetailsbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(landlordFilterbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(174, 174, 174))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, propertiesTabLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(startDatedc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(endDatadc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11)
+                                    .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(monthlyRatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(roomTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel14)))
+                            .addGroup(propertiesTabLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(saveNewleasebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(saveLeasechangesbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, propertiesTabLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(deleteLeasebtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(clearLeaseDetailsbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
         );
         propertiesTabLayout.setVerticalGroup(
             propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -742,18 +860,105 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(clearLandlordfitlerbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(landlordFilterbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(landlordFilterbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(propertiesTabLayout.createSequentialGroup()
                         .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(landlordTitle3)
                             .addComponent(landlordTitle5)
-                            .addComponent(landlordTitle4))
+                            .addComponent(landlordTitle4)
+                            .addComponent(landlordTitle6))
                         .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(propertiesTabLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(listPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(propertiesTabLayout.createSequentialGroup()
+                                        .addComponent(houseAddresstxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(houseCitytxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(houseCountytxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(propertiesTabLayout.createSequentialGroup()
+                                                .addComponent(housePostcodetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(propertiesTabLayout.createSequentialGroup()
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(houseLatefeeLbl)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(houseLatefeetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(propertiesTabLayout.createSequentialGroup()
+                                                        .addGap(6, 6, 6)
+                                                        .addComponent(jLabel10)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(houseLegOcctxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(propertiesTabLayout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(houseRoomNotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(houseTypetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(housePetstxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(SavePropertyChangesbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SaveNewPropertybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(deleteSelectedPropertybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(clearPropertyDetailsbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, propertiesTabLayout.createSequentialGroup()
+                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, propertiesTabLayout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane2)
+                                            .addComponent(listPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, propertiesTabLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(propertiesTabLayout.createSequentialGroup()
+                                                .addComponent(jLabel11)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(startDatedc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel12)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(endDatadc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel13)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(monthlyRatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel14)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(roomTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(saveLeasechangesbtn)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(saveNewleasebtn)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(deleteLeasebtn)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(clearLeaseDetailsbtn)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jScrollPane4))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(propertiesTabLayout.createSequentialGroup()
@@ -801,62 +1006,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(clearLandlordfitlerbtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(landlordFilterbtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(propertiesTabLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(propertiesTabLayout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(8, 8, 8)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(propertiesTabLayout.createSequentialGroup()
-                                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(propertiesTabLayout.createSequentialGroup()
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jLabel7)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(propertiesTabLayout.createSequentialGroup()
-                                                        .addGap(6, 6, 6)
-                                                        .addComponent(jLabel10)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGroup(propertiesTabLayout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(propertiesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(SaveLandlordChangesbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(AddnewLandlordbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(deleteLandlordbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteLandlordbtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                            .addComponent(landlordFilterbtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addGap(23, 23, 23))
         );
 
@@ -868,7 +1018,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         tenantsTab.setLayout(tenantsTabLayout);
         tenantsTabLayout.setHorizontalGroup(
             tenantsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2351, Short.MAX_VALUE)
+            .addGap(0, 2423, Short.MAX_VALUE)
         );
         tenantsTabLayout.setVerticalGroup(
             tenantsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -883,7 +1033,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         enquiriesTab.setLayout(enquiriesTabLayout);
         enquiriesTabLayout.setHorizontalGroup(
             enquiriesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2351, Short.MAX_VALUE)
+            .addGap(0, 2423, Short.MAX_VALUE)
         );
         enquiriesTabLayout.setVerticalGroup(
             enquiriesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -898,7 +1048,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         repairsTab.setLayout(repairsTabLayout);
         repairsTabLayout.setHorizontalGroup(
             repairsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2351, Short.MAX_VALUE)
+            .addGap(0, 2423, Short.MAX_VALUE)
         );
         repairsTabLayout.setVerticalGroup(
             repairsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -921,11 +1071,17 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1199, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1667, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -945,7 +1101,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
 
     private void AddnewLandlordbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddnewLandlordbtnActionPerformed
         this.addLandlord();
-        this.clearInput();
+        this.clearLandlordInput();
     }//GEN-LAST:event_AddnewLandlordbtnActionPerformed
 
     private void SaveLandlordChangesbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLandlordChangesbtnActionPerformed
@@ -989,33 +1145,60 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         // TODO add your handling code here:
     }//GEN-LAST:event_landlordNameInp3ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void houseCitytxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_houseCitytxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_houseCitytxtActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void housePostcodetxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_housePostcodetxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_housePostcodetxtActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void housePetstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_housePetstxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_housePetstxtActionPerformed
 
-    private void deleteLandlordbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLandlordbtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteLandlordbtn1ActionPerformed
+    private void deleteSelectedPropertybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedPropertybtnActionPerformed
+        this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).removeHouseAt(this.houseViewList.getSelectedIndex());
+        this.clearHouseInput();
+    }//GEN-LAST:event_deleteSelectedPropertybtnActionPerformed
 
-    private void AddnewLandlordbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddnewLandlordbtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddnewLandlordbtn1ActionPerformed
+    private void SaveNewPropertybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveNewPropertybtnActionPerformed
+        this.addNewHouse(this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()));
+        this.clearHouseInput();
+    }//GEN-LAST:event_SaveNewPropertybtnActionPerformed
 
-    private void SaveLandlordChangesbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLandlordChangesbtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaveLandlordChangesbtn1ActionPerformed
+    private void SavePropertyChangesbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavePropertyChangesbtnActionPerformed
+        this.savePropertyChanges(this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).getHouseAt(this.houseViewList.getSelectedIndex()));
+    }//GEN-LAST:event_SavePropertyChangesbtnActionPerformed
 
-    private void deleteLandlordbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLandlordbtn2ActionPerformed
+    private void houseViewListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_houseViewListMouseClicked
+        this.populateLeaseList(this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).getHouseAt(this.houseViewList.getSelectedIndex()));
+        this.populateHouseDetails(this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).getHouseAt(this.houseViewList.getSelectedIndex()));
+    }//GEN-LAST:event_houseViewListMouseClicked
+
+    private void ClearLandlordDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearLandlordDetailsActionPerformed
+        this.clearLandlordInput();
+    }//GEN-LAST:event_ClearLandlordDetailsActionPerformed
+
+    private void clearPropertyDetailsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearPropertyDetailsbtnActionPerformed
+        this.clearHouseInput();
+    }//GEN-LAST:event_clearPropertyDetailsbtnActionPerformed
+
+    private void leaseListviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaseListviewMouseClicked
+        this.populateLeaseDetails(this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).getHouseAt(this.houseViewList.getSelectedIndex()).getLeaseAt(this.leaseListview.getSelectedIndex()));
+    }//GEN-LAST:event_leaseListviewMouseClicked
+
+    private void saveLeasechangesbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveLeasechangesbtnActionPerformed
+        this.saveLeaseChanges(this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).getHouseAt(this.houseViewList.getSelectedIndex()).getLeaseAt(this.leaseListview.getSelectedIndex()));
+    }//GEN-LAST:event_saveLeasechangesbtnActionPerformed
+
+    private void saveNewleasebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewleasebtnActionPerformed
+        this.saveNewLease(this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).getHouseAt(this.houseViewList.getSelectedIndex()));
+    }//GEN-LAST:event_saveNewleasebtnActionPerformed
+
+    private void deleteLeasebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLeasebtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteLandlordbtn2ActionPerformed
+    }//GEN-LAST:event_deleteLeasebtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1057,6 +1240,39 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
                 new Address("8 Wyndham Sqaure", "Plymouth", "Devon", "PL1 5EF"), "thomassmith@tshs.info"));
         
         this.list.getLandlordAt(0).addHouse(new House("10c Redwell Road", "Paignton", "Devon", "TQ3 3PR", 10, "It's a house", 4,"Semi-Detached", "Yes", 6));
+        SimpleDateFormat SDF = new SimpleDateFormat("DD/MM/YYYY");
+        
+        try {
+            this.list.getLandlordAt(0).getHouseAt(0).addLease(new Lease(SDF.parse("06/09/2013"), SDF.parse("06/07/2014"), 84, "Room 3"));
+        } catch (ParseException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void deleteSelecetedLease(){
+        this.list.getLandlordAt(this.landlordListview2.getSelectedIndex()).getHouseAt(this.houseViewList.getSelectedIndex()).deleteLease(this.leaseListview.getSelectedIndex());
+    }
+    private void saveLeaseChanges(Lease lease){
+        lease.setEndDate(this.endDatadc.getDate());
+        lease.setStartDate(this.startDatedc.getDate());
+        lease.setMonthlyRate(Integer.parseInt(this.monthlyRatetxt.getText()));
+        lease.setRoom(this.roomTxt.getText());
+    }
+    
+    private void saveNewLease(House house){
+        try {
+            Lease lease = new Lease();
+            lease.setEndDate(this.endDatadc.getDate());
+            lease.setStartDate(this.startDatedc.getDate());
+            lease.setMonthlyRate(Integer.parseInt(this.monthlyRatetxt.getText()));
+            lease.setRoom(this.roomTxt.getText());
+            house.addLease(lease);
+        } catch (ParseException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Monthly must be a number.",
+                    "Data input Error.", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void populateProperties(){
@@ -1111,7 +1327,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         }
     }
     
-    private void clearInput(){
+    private void clearLandlordInput(){
         this.llAddresstxt.setText("");
         this.llCitytxt.setText("");
         this.llCountytxt.setText("");
@@ -1121,56 +1337,152 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         this.llEmailAddresstxt.setText("");
     }
     
+    private void clearHouseInput(){
+        this.houseAddresstxt.setText("");
+        this.houseCitytxt.setText("");
+        this.houseCountytxt.setText("");
+        this.houseLatefeetxt.setText(null);
+        this.houseLegOcctxt.setText(null);
+        this.houseRoomNotxt.setText(null);
+        this.housePetstxt.setText("");
+        this.housePostcodetxt.setText("");
+        this.houseTypetxt.setText("");
+        this.houseDesctxt.setText("");
+    }
+    
+    private void clearLeaseInput(){
+        this.startDatedc.setDate(null);
+        this.endDatadc.setDate(null);
+        this.roomTxt.setText("");
+        this.monthlyRatetxt.setText("");
+    }
+    
     private void deleteLandlord(Landlord togo){
         this.list.deleteLandlord(togo);
+    }
+    
+    private void populateLeaseList(House house){
+        this.leaseList.clear();
+        for (Lease currLease : house.getLeastList()){
+            this.leaseList.addElement(currLease.getRoom());
+        }
+    }
+    
+    private void populateHouseDetails(House house){
+        this.houseAddresstxt.setText(house.getAddress());
+        this.houseCitytxt.setText(house.getCity());
+        this.houseCountytxt.setText(house.getCounty());
+        this.houseLatefeetxt.setText(Integer.toString(house.getLateFee()));
+        this.houseLegOcctxt.setText(Integer.toString(house.getLegalOcc()));
+        this.houseRoomNotxt.setText(Integer.toString(house.getNoRooms()));
+        this.housePetstxt.setText(house.getPets());
+        this.housePostcodetxt.setText(house.getPostcode());
+        this.houseTypetxt.setText(house.getHousetype());
+        this.houseDesctxt.setText(house.getDescription());
+    }
+    
+    private void populateLeaseDetails(Lease lease){
+       this.startDatedc.setDate(lease.getStartDate());
+        this.endDatadc.setDate(lease.getEndDate());
+        this.roomTxt.setText(lease.getRoom());
+        this.monthlyRatetxt.setText(Integer.toString(lease.getMonthlyRate()));
+    }
+    
+    private void savePropertyChanges(House house){
+        try{
+        house.setAddress(this.houseAddresstxt.getText());
+        house.setCity(this.houseCitytxt.getText());
+        house.setCounty(this.houseCountytxt.getText());
+        house.setLegalOcc(Integer.parseInt(this.houseLegOcctxt.getText()));
+        house.setNoRooms(Integer.parseInt(this.houseRoomNotxt.getText()));
+        house.setLateFee(Integer.parseInt(this.houseLatefeetxt.getText()));
+        house.setPets(this.housePetstxt.getText());
+        house.setPostcode(this.housePostcodetxt.getText());
+        house.setHousetype(this.houseTypetxt.getText());
+        house.setDescription(this.houseDesctxt.getText());
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Invalid data inputs, see Legal Occupants, number of rooms or Late fee.",
+                    "Data input Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void addNewHouse(Landlord landlord){
+        House house = new House();
+        
+        try{
+        house.setAddress(this.houseAddresstxt.getText());
+        house.setCity(this.houseCitytxt.getText());
+        house.setCounty(this.houseCountytxt.getText());
+        house.setLegalOcc(Integer.parseInt(this.houseLegOcctxt.getText()));
+        house.setNoRooms(Integer.parseInt(this.houseRoomNotxt.getText()));
+        house.setLateFee(Integer.parseInt(this.houseLatefeetxt.getText()));
+        house.setPets(this.housePetstxt.getText());
+        house.setPostcode(this.housePostcodetxt.getText());
+        house.setHousetype(this.houseTypetxt.getText());
+        house.setDescription(this.houseDesctxt.getText());
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Invalid data inputs, see Legal Occupants, number of rooms or Late fee.",
+                    "Data input Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        landlord.addHouse(house);
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddnewLandlordbtn;
-    private javax.swing.JButton AddnewLandlordbtn1;
+    private javax.swing.JButton ClearLandlordDetails;
     private javax.swing.JLabel NoProplbl;
     private javax.swing.JLabel NoProplbl1;
     private javax.swing.JLabel NoProplbl2;
     private javax.swing.JLabel NoProplbl3;
     private javax.swing.JButton SaveLandlordChangesbtn;
-    private javax.swing.JButton SaveLandlordChangesbtn1;
+    private javax.swing.JButton SaveNewPropertybtn;
+    private javax.swing.JButton SavePropertyChangesbtn;
     private javax.swing.JButton clearLandlordfitlerbtn;
     private javax.swing.JButton clearLandlordfitlerbtn1;
     private javax.swing.JButton clearLandlordfitlerbtn2;
     private javax.swing.JButton clearLandlordfitlerbtn3;
+    private javax.swing.JButton clearLeaseDetailsbtn;
+    private javax.swing.JButton clearPropertyDetailsbtn;
     private javax.swing.JButton deleteLandlordbtn;
-    private javax.swing.JButton deleteLandlordbtn1;
-    private javax.swing.JButton deleteLandlordbtn2;
+    private javax.swing.JButton deleteLeasebtn;
+    private javax.swing.JButton deleteSelectedPropertybtn;
+    private com.toedter.calendar.JDateChooser endDatadc;
     private javax.swing.JPanel enquiriesTab;
+    private javax.swing.JTextField houseAddresstxt;
+    private javax.swing.JTextField houseCitytxt;
+    private javax.swing.JTextField houseCountytxt;
+    private javax.swing.JTextPane houseDesctxt;
+    private javax.swing.JLabel houseLatefeeLbl;
+    private javax.swing.JTextField houseLatefeetxt;
+    private javax.swing.JTextField houseLegOcctxt;
+    private javax.swing.JTextField housePetstxt;
+    private javax.swing.JTextField housePostcodetxt;
+    private javax.swing.JTextField houseRoomNotxt;
+    private javax.swing.JTextField houseTypetxt;
+    private javax.swing.JList houseViewList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextField landlordAddressInp;
     private javax.swing.JTextField landlordAddressInp1;
     private javax.swing.JTextField landlordAddressInp2;
@@ -1215,6 +1527,8 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
     private javax.swing.JLabel landlordTitle3;
     private javax.swing.JLabel landlordTitle4;
     private javax.swing.JLabel landlordTitle5;
+    private javax.swing.JLabel landlordTitle6;
+    private javax.swing.JList leaseListview;
     private javax.swing.JScrollPane listPane;
     private javax.swing.JScrollPane listPane1;
     private javax.swing.JLabel llAddresslbl;
@@ -1232,8 +1546,13 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
     private javax.swing.JTextField llSurnametxt;
     private javax.swing.JLabel llforenamelbl;
     private javax.swing.JTabbedPane mainTab;
+    private javax.swing.JTextField monthlyRatetxt;
     private javax.swing.JPanel propertiesTab;
     private javax.swing.JPanel repairsTab;
+    private javax.swing.JTextField roomTxt;
+    private javax.swing.JButton saveLeasechangesbtn;
+    private javax.swing.JButton saveNewleasebtn;
+    private com.toedter.calendar.JDateChooser startDatedc;
     private javax.swing.JPanel tenantsTab;
     // End of variables declaration//GEN-END:variables
 

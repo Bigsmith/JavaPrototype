@@ -322,6 +322,14 @@ public class House implements IObserver, ISubject{
         return isDone;   
     }
     
+    public void deleteLease(int index){
+        this.leaseList.remove(index);
+    }
+    
+    public ArrayList<Lease> getLeastList(){
+        return this.leaseList;
+    }
+    
     @Override
     public boolean registerObserver(IObserver o) {
         Boolean binAdded = false;

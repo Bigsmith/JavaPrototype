@@ -259,6 +259,11 @@ public class Landlord implements IObserver, ISubject{
         return this.houses;
     }
     
+    public void removeHouseAt(int index){
+        this.houses.remove(index);
+        this.notifyObservers();
+    }
+    
     @Override
     public void update() {
         this.notifyObservers();
