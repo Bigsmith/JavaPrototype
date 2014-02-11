@@ -86,6 +86,10 @@ public class House implements IObserver, ISubject{
         return this.address.getAddress();
     }
     
+    public Address getAddressObject(){
+        return this.address;
+    }
+    
     /**
      * Accessor for City, setting the value of city within the address variable.
      * Returns a Boolean value.

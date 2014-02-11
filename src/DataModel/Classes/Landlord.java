@@ -255,6 +255,10 @@ public class Landlord implements IObserver, ISubject{
         return this.surname + ", " + this.forename;
     }
     
+    public ArrayList<House> getHouses(){
+        return this.houses;
+    }
+    
     @Override
     public void update() {
         this.notifyObservers();

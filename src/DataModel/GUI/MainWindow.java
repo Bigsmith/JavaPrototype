@@ -7,10 +7,12 @@
 package DataModel.GUI;
 
 import DataModel.Classes.Address;
+import DataModel.Classes.House;
 import DataModel.Classes.Landlord;
 import DataModel.Classes.LandlordList;
 import DataModel.Interfaces.IObserver;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,11 +22,13 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
 
     private DefaultListModel landlordList;
     private LandlordList list;
+    private DefaultListModel houseList;
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         this.landlordList = new DefaultListModel();
+        this.houseList = new DefaultListModel();
         this.list = new LandlordList();
         this.refreshListModel();
         list.registerObserver(this);
@@ -111,6 +115,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         landlordFilterTitle2 = new javax.swing.JLabel();
         landlordTitle3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         landlordTitle4 = new javax.swing.JLabel();
         landlordEmaillbl3 = new javax.swing.JLabel();
         landlordPropInp3 = new javax.swing.JTextField();
@@ -471,6 +476,9 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
 
         landlordTitle3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         landlordTitle3.setText("Landlords");
+
+        jList1.setModel(houseList);
+        jScrollPane2.setViewportView(jList1);
 
         landlordTitle4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         landlordTitle4.setText("Properties");
@@ -968,7 +976,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
     }//GEN-LAST:event_landlordNameInp2ActionPerformed
 
     private void landlordListview2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_landlordListview2MouseClicked
-        // TODO add your handling code here:
+        populateProperties();
     }//GEN-LAST:event_landlordListview2MouseClicked
 
     private void landlordFilterbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_landlordFilterbtn3ActionPerformed
@@ -1045,6 +1053,15 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
     private void testData(){
         this.list.addLandlord(new Landlord("Thomas","Smith", 
                 new Address("8 Wyndham Sqaure", "Plymouth", "Devon", "PL1 5EF"), "thomassmith@tshs.info"));
+        
+        this.list.getLandlordAt(0).addHouse(new House("10c Redwell Road", "Paignton", "Devon", "TQ3 3PR", 10, "It's a house", 4,"Semi-Detached", "Yes", 6));
+    }
+    
+    private void populateProperties(){
+        Landlord landlord = this.list.getLandlordAt(this.landlordListview2.getSelectedIndex());
+        for (House currHouse : landlord.getHouses()){
+            this.houseList.addElement(currHouse.getAddressObject().getAsString());
+        }
     }
     
     private void displayData(int index){
@@ -1063,21 +1080,32 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
         this.list.getLandlordAt(index).setCity(this.llCitytxt.getText());
         this.list.getLandlordAt(index).setCounty(this.llCountytxt.getText());
         this.list.getLandlordAt(index).setEmail(this.llEmailAddresstxt.getText());
-        this.list.getLandlordAt(index).setPostcode(this.llEmailAddresstxt.getText());
+        this.list.getLandlordAt(index).setPostcode(this.llPostcodetxt.getText());
         this.list.getLandlordAt(index).setSurname(this.llSurnametxt.getText());
         this.list.getLandlordAt(index).setforename(this.llForenametxt.getText());
     }
     
     private void addLandlord(){
+        Boolean exists = false;
+        for (Landlord currLandlord : this.list.getList()){
+            if (this.llEmailAddresstxt.getText() == currLandlord.getEmail())
+                exists = true;
+        }
         Landlord tempLl = new Landlord();
-        tempLl.setAddress(this.llAddresstxt.getText());
-        tempLl.setCity(this.llCitytxt.getText());
-        tempLl.setCounty(this.llCountytxt.getText());
-        tempLl.setEmail(this.llEmailAddresstxt.getText());
-        tempLl.setPostcode(this.llPostcodetxt.getText());
-        tempLl.setSurname(this.llSurnametxt.getText());
-        tempLl.setforename(this.llForenametxt.getText());
-        this.list.addLandlord(tempLl);
+        
+        if (!exists){
+            tempLl.setAddress(this.llAddresstxt.getText());
+            tempLl.setCity(this.llCitytxt.getText());
+            tempLl.setCounty(this.llCountytxt.getText());
+            tempLl.setEmail(this.llEmailAddresstxt.getText());
+            tempLl.setPostcode(this.llPostcodetxt.getText());
+            tempLl.setSurname(this.llSurnametxt.getText());
+            tempLl.setforename(this.llForenametxt.getText());
+            this.list.addLandlord(tempLl);
+        } else {
+            JOptionPane.showMessageDialog(this, "Email already on system",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void deleteLandlord(Landlord togo){
@@ -1112,6 +1140,7 @@ public class MainWindow extends javax.swing.JFrame implements IObserver{
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
